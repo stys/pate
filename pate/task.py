@@ -81,9 +81,11 @@ class Task(threading.Thread):
 
 
 class Wrapper(Task):
-    def __init__(self, func):
+    def __init__(self, func, *args, **kwargs):
         super(Wrapper, self).__init__()
         self.func = func
+        self.args = args,
+        self.kwargs = kwargs
 
     def __call__(self, executor):
-        self.func()
+        self.func(*self.args, **self.kwargs)
